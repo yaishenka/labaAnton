@@ -23,11 +23,8 @@ public:
     template<class T>
     void get_c_bin(T &tmp);
 
-    void write_c(int tmp);
-
-    void write_c(double tmp);
-
-    void write_c(float tmp);
+    template<typename T>
+    void write_c(T tmp);
 
     std::fstream *get_pointer() { return &stream; }
 

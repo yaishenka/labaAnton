@@ -66,6 +66,16 @@ public:
 
     void output(){
         FM output_file("output.txt", 'w', 't');
-
+        std::vector<std::pair<string, CallInDataSet>> out = prepairData();
+        output_file.write_c(out.size());
+        output_file.write_c('\n');
+        for (auto p : out){
+            output_file.write_c(p.first);
+            output_file.write_c(' ');
+            output_file.write_c(p.second._sumPrice);
+            output_file.write_c(' ');
+            output_file.write_c(p.second._sumPeriod);
+            output_file.write_c('\n');
+        }
     }
 };

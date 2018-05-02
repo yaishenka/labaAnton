@@ -9,5 +9,7 @@
 using namespace std;
 
 int main(){
-
+    DataSet lab;
+    lab.input();
+    lab.output();
 }

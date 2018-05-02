@@ -75,42 +75,20 @@ void FM::get_c_text(T &tmp) {
     }
 }
 
-void FM::write_c(int tmp) {
+template<typename T>
+void FM::write_c(T tmp) {
     if (mode == 'w') {
         if (type_m == 't') {
 
             stream << tmp;
         } else {
-            stream.write((char *) &tmp, sizeof(int));
+            stream.write((char *) &tmp, sizeof(T));
         }
     } else {
         throw ("Wrong mode. Use mode 'w'");
     }
 }
-void FM::write_c(double tmp) {
-    if (mode == 'w') {
-        if (type_m == 't') {
 
-            stream << tmp;
-        } else {
-            stream.write((char *) &tmp, sizeof(int));
-        }
-    } else {
-        throw ("Wrong mode. Use mode 'w'");
-    }
-}
-void FM::write_c(float tmp) {
-    if (mode == 'w') {
-        if (type_m == 't') {
-
-            stream << tmp;
-        } else {
-            stream.write((char *) &tmp, sizeof(int));
-        }
-    } else {
-        throw ("Wrong mode. Use mode 'w'");
-    }
-}
 
 
 
