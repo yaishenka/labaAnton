@@ -23,6 +23,13 @@ public:
     int _count = 0;
 };
 
+struct hash<PhoneNumber>
+{
+    size_t operator()(const PhoneNumber& x) const {
+        return std::hash<string>()(string(x._phoneNumber));
+    }
+};
+
 struct DataSet {
 public:
 	std::map<PhoneNumber, CallInDataSet> _data;
