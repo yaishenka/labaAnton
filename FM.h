@@ -17,10 +17,10 @@ public:
     void write_struct_binary(T CurrentStructure);
 
     template<class T>
-    void get_c(T &tmp);
+    void get_c_text(T &tmp);
 
     template<class T>
-    void get_c_text(T &tmp);
+    void get_c_bin(T &tmp);
 
     void write_c(int tmp);
 
