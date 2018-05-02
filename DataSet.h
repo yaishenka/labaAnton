@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
 #include "DateTime.h"
-
+using namespace std;
 
 struct PhoneNumber {
-	char _phoneNumber[16];
-}
+    char _phoneNumber[16];
+};
 struct Call {
 public:
     char _FIO[51];
@@ -32,11 +33,10 @@ struct hash<PhoneNumber>
 
 struct DataSet {
 public:
-	std::map<PhoneNumber, CallInDataSet> _data;
-    void add(Call current) {	
-		_data[current._phoneNumber]._count++;
-		_data[current._phoneNumber]._sumPeriod += current._periodInSeconds;
-		_data[current._phoneNumber]._sumPrice += (current._pricePerMinute / 60 * current._periodInSeconds);
+    std::map<PhoneNumber, CallInDataSet> _data;
+    void add(Call current) {
+        _data[current._phoneNumber]._count++;
+        _data[current._phoneNumber]._sumPeriod += current._periodInSeconds;
+        _data[current._phoneNumber]._sumPrice += (current._pricePerMinute / 60 * current._periodInSeconds);
     }
 };
-
