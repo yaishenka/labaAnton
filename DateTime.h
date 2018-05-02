@@ -52,8 +52,6 @@ bool operator <= (const Time& T1, const Time& T2) {
 }
 
 bool operator <= (const DateTime& DT1, const DateTime& DT2) {
-	if (DT1._date <= DT2._date && DT1._time <= DT2._time) 
-		return true;
-	return false;
+	return DT1._date <= DT2._date && DT1._time <= DT2._time;
 }
 

@@ -1,4 +1,5 @@
 #include "FM.h"
+using namespace std;
 
 explicit FM::FM(char *file_name_t, char mode_t = 'r', char type_t = 't') {
     open_file(file_name_t, mode_t, type_t);
@@ -29,7 +30,7 @@ void FM::open_file(char *file_name_t, char mode_t = 'r', char type_t = 't') {
     file_name = file_name_t;
 }
 
-~FM::FM() {
+FM::~FM() {
     stream.close();
 }
 
@@ -82,7 +83,7 @@ void FM::write_c(int tmp) {
 
             stream << tmp;
         } else {
-            stream.write((char *) &tmp, sizeof(T));
+            stream.write((char *) &tmp, sizeof(int));
         }
     } else {
         throw ("Wrong mode. Use mode 'w'");
@@ -94,7 +95,7 @@ void FM::write_c(double tmp) {
 
             stream << tmp;
         } else {
-            stream.write((char *) &tmp, sizeof(T));
+            stream.write((char *) &tmp, sizeof(int));
         }
     } else {
         throw ("Wrong mode. Use mode 'w'");
@@ -106,7 +107,7 @@ void FM::write_c(float tmp) {
 
             stream << tmp;
         } else {
-            stream.write((char *) &tmp, sizeof(T));
+            stream.write((char *) &tmp, sizeof(int));
         }
     } else {
         throw ("Wrong mode. Use mode 'w'");
@@ -176,4 +177,3 @@ void FM::bin2txt(string new_file_name = "", bool delete_file = false) {
         this->delete_file();
     }
 }
-};
