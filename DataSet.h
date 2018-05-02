@@ -8,13 +8,10 @@
 
 using namespace std;
 
-struct PhoneNumber {
-    char _phoneNumber[16];
-};
 struct Call {
 public:
     char _FIO[51];
-    PhoneNumber _phoneNumber;
+    char _phoneNumber[16];
     DateTime _startTime;
     int _periodInSeconds;
     float _pricePerMinute;
@@ -26,25 +23,20 @@ public:
     int _sumPeriod = 0;
     int _count = 0;
 };
-template <>
-struct hash<PhoneNumber> {
-    size_t operator()(const PhoneNumber &x) const {
-        return std::hash<string>()(string(x._phoneNumber));
-    }
-};
+
 
 struct DataSet {
 private:
     int n;
     DateTime T1{}, T2{};
 public:
-    std::map<PhoneNumber, CallInDataSet> _data;
+    std::map<string, CallInDataSet> _data;
 
     void add(Call current) {
         if (T1 <= current._startTime && current._startTime <= T2) {
-            _data[current._phoneNumber]._count++;
-            _data[current._phoneNumber]._sumPeriod += current._periodInSeconds;
-            _data[current._phoneNumber]._sumPrice += ceil(current._pricePerMinute / 60 * current._periodInSeconds);
+            _data[string(current._phoneNumber)]._count++;
+            _data[string(current._phoneNumber)]._sumPeriod += current._periodInSeconds;
+            _data[string(current._phoneNumber)]._sumPrice += ceil(current._pricePerMinute / 60 * current._periodInSeconds);
         }
     }
 
