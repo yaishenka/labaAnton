@@ -6,7 +6,7 @@
 
 struct PhoneNumber {
 	char _phoneNumber[16];
-}
+};
 struct Call {
 public:
     char _FIO[51];
