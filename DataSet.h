@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <vector>
 #include <math.h>
 #include "DateTime.h"
 #include "FM.h"
@@ -51,6 +52,16 @@ public:
             add(tmp);
         }
         input_file.close_file();
+    }
+
+    std::vector<std::pair<string, CallInDataSet>> prepairData () {
+        std::vector<std::pair<string, CallInDataSet>> data;
+        for (auto it = _data.begin(); it != _data.end(); ++it) {
+             if (it->second._count <= 3) {
+                 data.push_back(std::make_pair(it->first, it->second));
+             }
+        }
+        return data;
     }
 
     void output(){
