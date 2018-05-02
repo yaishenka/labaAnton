@@ -26,7 +26,7 @@ public:
     int _sumPeriod = 0;
     int _count = 0;
 };
-
+template <>
 struct hash<PhoneNumber> {
     size_t operator()(const PhoneNumber &x) const {
         return std::hash<string>()(string(x._phoneNumber));
@@ -59,5 +59,10 @@ public:
             add(tmp);
         }
         input_file.close_file();
+    }
+
+    void output(){
+        FM output_file("output.txt", 'w', 't');
+
     }
 };

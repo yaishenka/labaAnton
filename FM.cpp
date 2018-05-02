@@ -1,11 +1,11 @@
 #include "FM.h"
 using namespace std;
 
-explicit FM::FM(char *file_name_t, char mode_t = 'r', char type_t = 't') {
+FM::FM(char *file_name_t, char mode_t, char type_t) {
     open_file(file_name_t, mode_t, type_t);
 }
 
-void FM::open_file(char *file_name_t, char mode_t = 'r', char type_t = 't') {
+void FM::open_file(char *file_name_t, char mode_t, char type_t) {
     if (mode_t == 'w') {
         if (type_t == 't') {
             stream.open(file_name_t, fstream::out);
@@ -114,7 +114,7 @@ void FM::write_c(float tmp) {
 
 
 
-void FM::close_file(bool for_renaming = false) {
+void FM::close_file(bool for_renaming) {
     stream.close();
     if (!for_renaming) {
         mode = NULL;
@@ -141,7 +141,7 @@ void FM::delete_file() {
 }
 
 template<typename T>
-void FM::text2bin(string new_file_name = "", bool delete_file = false) {
+void FM::text2bin(string new_file_name, bool delete_file) {
     if (new_file_name == "") {
         new_file_name = (string) file_name + bin_extention;
     }
@@ -159,7 +159,7 @@ void FM::text2bin(string new_file_name = "", bool delete_file = false) {
 }
 
 template<typename T>
-void FM::bin2txt(string new_file_name = "", bool delete_file = false) {
+void FM::bin2txt(string new_file_name, bool delete_file) {
     if (new_file_name == "") {
         new_file_name = (string) file_name + txt_extention;
     }

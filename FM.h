@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 //#include <string>
+using namespace std;
 
 class FM {
 public:
@@ -37,9 +38,9 @@ public:
     void delete_file();
 
     template<class T>
-    void text2bin(std::string new_file_name = "", bool delete_file = false);
-
-    void bin2txt(std::string new_file_name = "", bool delete_file = false);
+    void text2bin(string new_file_name = "", bool delete_file = false);
+    template<typename T>
+    void bin2txt(string new_file_name = "", bool delete_file = false);
 
 
 private:
