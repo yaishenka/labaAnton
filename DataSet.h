@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <math.h>
 #include "DateTime.h"
 #include "FM.h"
 
@@ -40,9 +41,11 @@ public:
     std::map<PhoneNumber, CallInDataSet> _data;
 
     void add(Call current) {
-        _data[current._phoneNumber]._count++;
-        _data[current._phoneNumber]._sumPeriod += current._periodInSeconds;
-        _data[current._phoneNumber]._sumPrice += (current._pricePerMinute / 60 * current._periodInSeconds);
+        if (T1 <= current._startTime && current._startTime <= T2) {
+            _data[current._phoneNumber]._count++;
+            _data[current._phoneNumber]._sumPeriod += current._periodInSeconds;
+            _data[current._phoneNumber]._sumPrice += ceil(current._pricePerMinute / 60 * current._periodInSeconds);
+        }
     }
 
     void input(){
