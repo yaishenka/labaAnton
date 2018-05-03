@@ -4,12 +4,12 @@
 
 #include <iostream>
 #include "DataSet.h"
-//#include "FM.h"
 
 using namespace std;
 
 int main(){
+    make_bin_file("input.bin");
     DataSet lab;
-    lab.input();
-    lab.output();
+    lab.input("input.bin");
+    lab.output("output.txt");
 }

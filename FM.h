@@ -42,9 +42,9 @@ public:
 
 private:
     std::fstream stream;
-    char mode{};
-    char type_m{};
-    char *file_name{};
+    char mode;
+    char type_m;
+    char *file_name;
     std::string bin_extention = ".bin";
     std::string txt_extention = ".txt";
 };

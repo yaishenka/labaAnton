@@ -55,7 +55,7 @@ void FM::write_struct_binary(T CurrentStructure) {
 template<typename T>
 void FM::get_c_bin(T &tmp) {
     if (mode == 'r') {
-        if (type_m == 't') {
+        if (type_m == 'b') {
             stream.read((char *) &tmp, sizeof(T));
         }
     } else {
