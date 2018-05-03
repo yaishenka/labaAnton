@@ -1,11 +1,9 @@
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <map>
 #include <vector>
-#include <math.h>
+#include <cmath>
 #include "DateTime.h"
-#include<fstream>
 using namespace std;
 
 struct Call {
@@ -33,23 +31,26 @@ public:
     std::map<string, CallInDataSet> _data;
 
     void add(Call current) {
-        if (T1 <= current._startTime && current._startTime <= T2) {
+
+        if ((T1 <= current._startTime) && (current._startTime <= T2)) {
+
             _data[string(current._phoneNumber)]._count++;
             _data[string(current._phoneNumber)]._sumPeriod += current._periodInSeconds;
-            _data[string(current._phoneNumber)]._sumPrice += ceil(current._pricePerMinute / 60 * current._periodInSeconds);
+            _data[string(current._phoneNumber)]._sumPrice += ceil(
+                    current._pricePerMinute / 60 * current._periodInSeconds);
         }
     }
 
-    void input(char * file_name){
-        ifstream instr(file_name,ios::in | ios::binary);
-        instr.read((char*)&n,sizeof(int));
-        instr.read((char*)&T1,sizeof(DateTime));
-        instr.read((char*)&T2,sizeof(DateTime));
+    void input(char * file_name) {
+        ifstream instr(file_name, ios::in | ios::binary);
+        instr.read((char *) &n, sizeof(int));
+        instr.read((char *) &T1, sizeof(DateTime));
+        instr.read((char *) &T2, sizeof(DateTime));
 
-        for(int i(0); i<this->n; ++i){
-            Call tmp;
+        for (int i(0); i < this->n; ++i) {
+            Call tmp{};
 
-            instr.read((char*)&tmp,sizeof(Call));
+            instr.read((char *) &tmp, sizeof(Call));
             add(tmp);
         }
         instr.close();
@@ -57,20 +58,20 @@ public:
 
     std::vector< std::pair<string, CallInDataSet> > prepairData() {
         std::vector< std::pair<string, CallInDataSet> > data;
-        for (auto it = _data.begin(); it != _data.end(); ++it) {
-             if (it->second._count <= 3) {
-                 data.push_back(std::make_pair(it->first, it->second));
+        for (auto &it : _data) {
+             if (it.second._count <= 3) {
+                 data.emplace_back(it.first, it.second);
              }
         }
         return data;
     }
 
-    void output(char * file_name){
-        ofstream instr(file_name,ios::out );
-        std::vector< std::pair<string, CallInDataSet> > out = prepairData();
-        instr<<out.size()<<endl;
-        for (auto p : out){
-            instr<<p.first<<" "<<p.second._sumPrice<<" "<<p.second._sumPeriod<<endl;
+    void output(char * file_name) {
+        ofstream instr(file_name, ios::out);
+        std::vector<std::pair<string, CallInDataSet> > out = prepairData();
+        instr << out.size() << endl;
+        for (auto p : out) {
+            instr << p.first << " " << p.second._sumPrice << " " << p.second._sumPeriod << endl;
         }
     }
 };
@@ -98,10 +99,10 @@ void make_bin_file(char * file_name) {
             {"Ivanov",    "8 995 753-84-51", DateTime{Date{17, 4, 2018}, Time{18, 11, 0}},  1346,  1.2},
             {"Kuznecov",  "8 937 876-55-55", DateTime{Date{18, 4, 2018}, Time{11, 23, 0}},  235,   0.1},
             {"Ivanov",    "8 995 753-84-51", DateTime{Date{18, 4, 2018}, Time{17, 56, 0}},  1672,  1.2},
-            {"Petrov",    "8 923 456-35-1",  DateTime{Date{15, 5, 2018}, Time{19, 34, 0}},  1345,  0.6},
+            {"Petrov",    "8 923 456-35-12", DateTime{Date{15, 5, 2018}, Time{19, 34, 0}},  1345,  0.6},
     };
-    for (int i(0); i < 15; ++i) {
-        instr.write((char *) &a[i], sizeof(Call));
+    for (auto &i : a) {
+        instr.write((char *) &i, sizeof(Call));
     }
     instr.close();
 }
